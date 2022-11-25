@@ -12,7 +12,7 @@ import me.dwidar.movieapp.src.app.MainScreen.model.MovieListItem
 class MoviesGridAdapter(private val moviesList : List<MovieListItem>) : RecyclerView.Adapter<MoviesGridAdapter.MyViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false), parent.context)
+        return MyViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int)
@@ -28,7 +28,7 @@ class MoviesGridAdapter(private val moviesList : List<MovieListItem>) : Recycler
         return moviesList.size
     }
 
-    class MyViewHolder(val itemBinding: MovieListItemBinding, val myContext: Context) : RecyclerView.ViewHolder(itemBinding.root)
+    class MyViewHolder(val itemBinding: MovieListItemBinding) : RecyclerView.ViewHolder(itemBinding.root)
     {
         fun bindItem(movieListItem: MovieListItem)
         {
