@@ -19,6 +19,33 @@
             android:src="@mipmap/img_placeholder"
             android:scaleType="centerCrop"/>
 
+        <LinearLayout
+            android:id="@+id/rateLayout"
+            android:background="@drawable/rate_background"
+            android:layout_gravity="end"
+            android:paddingVertical="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_24sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:background="@drawable/star_icn"/>
+
+            <TextView
+                android:id="@+id/movieRate"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:text="10.00"
+                android:textSize="@dimen/_10ssp"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
     </androidx.cardview.widget.CardView>
 
     <TextView

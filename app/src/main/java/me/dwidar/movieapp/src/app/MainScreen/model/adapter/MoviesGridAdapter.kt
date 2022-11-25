@@ -34,6 +34,7 @@ class MoviesGridAdapter(private val moviesList : List<MovieListItem>) : Recycler
         {
             itemBinding.movieName.text = movieListItem.imageName
             itemBinding.movieYear.text = movieListItem.movieYear
+            itemBinding.movieRate.text = movieListItem.rate.toString()
 
             Picasso.get().load(movieListItem.imageUrl)
                 .placeholder(R.mipmap.img_placeholder)
