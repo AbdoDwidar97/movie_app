@@ -1,5 +1,4 @@
 package me.dwidar.movieapp.src.app.MainScreen.model.adapter
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import me.dwidar.movieapp.R
 import me.dwidar.movieapp.databinding.MovieListItemBinding
 import me.dwidar.movieapp.src.app.MainScreen.model.MovieListItem
 
-class MoviesGridAdapter(private val moviesList : List<MovieListItem>) : RecyclerView.Adapter<MoviesGridAdapter.MyViewHolder>()
+class MoviesGridAdapter(private val moviesList : ArrayList<MovieListItem>) : RecyclerView.Adapter<MoviesGridAdapter.MyViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -20,7 +19,7 @@ class MoviesGridAdapter(private val moviesList : List<MovieListItem>) : Recycler
         val currentMovie = moviesList[position]
         holder.bindItem(currentMovie)
         holder.itemBinding.cardItem.setOnClickListener {
-            Log.d("Movie", "name: ${currentMovie.imageName}")
+            Log.d("Movie", "name: ${currentMovie.movieName}")
         }
     }
 
@@ -32,7 +31,7 @@ class MoviesGridAdapter(private val moviesList : List<MovieListItem>) : Recycler
     {
         fun bindItem(movieListItem: MovieListItem)
         {
-            itemBinding.movieName.text = movieListItem.imageName
+            itemBinding.movieName.text = movieListItem.movieName
             itemBinding.movieYear.text = movieListItem.movieYear
             itemBinding.movieRate.text = movieListItem.rate.toString()
 

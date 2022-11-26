@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import me.dwidar.movieapp.databinding.ActivityMainBinding
 import me.dwidar.movieapp.databinding.MainActionBarBinding
+import me.dwidar.movieapp.src.app.MainScreen.model.MovieListItem
 import me.dwidar.movieapp.src.app.MainScreen.model.adapter.MoviesGridAdapter
 import me.dwidar.movieapp.src.app.MainScreen.viewModel.MainViewModel
 
@@ -28,13 +29,38 @@ class MainActivity : AppCompatActivity()
 
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
-        gridLayoutManager = GridLayoutManager(applicationContext, 2, LinearLayoutManager.VERTICAL, false)
-        mainBinding.moviesGrid.layoutManager = gridLayoutManager
+        configureMoviesGridView()
 
         mainViewModel.getMoviesList().observe(this){
-            moviesGridAdapter = MoviesGridAdapter(it)
-            mainBinding.moviesGrid.adapter = moviesGridAdapter
+            updateMoviesGridView(it)
         }
 
+        mainViewModel.getLoadingValue().observe(this){
+            updateLoadingValue(it)
+        }
+
+        getMovies()
+    }
+
+    private fun configureMoviesGridView()
+    {
+        gridLayoutManager = GridLayoutManager(applicationContext, 2, LinearLayoutManager.VERTICAL, false)
+        mainBinding.moviesGrid.layoutManager = gridLayoutManager
+    }
+
+    private fun updateMoviesGridView(movies : ArrayList<MovieListItem>)
+    {
+        moviesGridAdapter = MoviesGridAdapter(movies)
+        mainBinding.moviesGrid.adapter = moviesGridAdapter
+    }
+
+    private fun updateLoadingValue(value : Int)
+    {
+        mainBinding.loadingBar.visibility = value
+    }
+
+    private fun getMovies()
+    {
+        mainViewModel.getMovies(this)
     }
 }
