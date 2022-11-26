@@ -12,6 +12,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
@@ -27,13 +28,17 @@ import me.dwidar.movieapp.src.core.database.MovieRepo
 import me.dwidar.movieapp.src.core.network.OnCallResponse
 import java.time.LocalDate
 import java.time.LocalDateTime
+import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
-class MainViewModel(application: Application) : AndroidViewModel(application)
+@HiltViewModel
+class MainViewModel
+    @Inject
+    constructor(private val application: Application, private val mainService: IMainScreenService) : ViewModel()
 {
     val moviesList : MutableLiveData<ArrayList<MovieListItem>> = MutableLiveData()
     private var loadingLiveData = MutableLiveData<Int>()
-    private val mainService = ImplMainScreenService()
+    // private val mainService = ImplMainScreenService()
     private var repo : MovieRepo
 
     init {
@@ -111,6 +116,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application)
             repo.addMovie(it)
         }
 
-        saveTimeToSharedPref(application = getApplication())
+        saveTimeToSharedPref(application = application)
     }
 }

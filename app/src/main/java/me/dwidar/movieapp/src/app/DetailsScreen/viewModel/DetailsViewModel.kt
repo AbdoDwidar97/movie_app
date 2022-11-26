@@ -1,5 +1,6 @@
 package me.dwidar.movieapp.src.app.DetailsScreen.viewModel
 
+import android.app.Application
 import android.content.Context
 import android.os.Build
 import android.view.Gravity
@@ -10,20 +11,27 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import me.dwidar.movieapp.src.app.DetailsScreen.model.MovieDetailsItem
 import me.dwidar.movieapp.src.app.DetailsScreen.model.MovieDetailsResponse
+import me.dwidar.movieapp.src.app.DetailsScreen.service.IService.IDetailsScreenService
 import me.dwidar.movieapp.src.app.DetailsScreen.service.ImplService.ImplDetailsScreenService
+import me.dwidar.movieapp.src.app.MainScreen.service.IService.IMainScreenService
 import me.dwidar.movieapp.src.core.network.OnCallResponse
 import java.time.LocalDate
+import javax.inject.Inject
 
-class DetailsViewModel : ViewModel()
+@HiltViewModel
+class DetailsViewModel
+    @Inject
+    constructor(private val application: Application, private val detailsService: IDetailsScreenService) : ViewModel()
 {
     private var loadingLiveData = MutableLiveData<Int>()
     private var movieDetails = MutableLiveData<MovieDetailsItem>()
-    private var detailsService = ImplDetailsScreenService()
+    // private var detailsService = ImplDetailsScreenService()
 
     fun getLoadingValue() : LiveData<Int> = loadingLiveData
     fun getMovieDetails() : LiveData<MovieDetailsItem> = movieDetails
