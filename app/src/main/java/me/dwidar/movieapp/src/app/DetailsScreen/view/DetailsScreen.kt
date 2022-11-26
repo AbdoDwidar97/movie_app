@@ -12,7 +12,8 @@ import me.dwidar.movieapp.databinding.MainActionBarBinding
 
 class DetailsScreen : Fragment()
 {
-    lateinit var detailsBinding: FragmentDetailsScreenBinding
+    private lateinit var detailsBinding: FragmentDetailsScreenBinding
+    private var movieID : Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +28,10 @@ class DetailsScreen : Fragment()
         super.onViewCreated(view, savedInstanceState)
 
         detailsBinding.loadingDetails.visibility = ProgressBar.INVISIBLE
+
+        movieID = arguments?.getInt("movieID")!!
+
+        detailsBinding.movieNameDetails.text = "Black Adam : $movieID"
     }
 
 }

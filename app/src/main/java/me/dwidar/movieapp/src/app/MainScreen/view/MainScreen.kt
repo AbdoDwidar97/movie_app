@@ -51,10 +51,6 @@ class MainScreen : Fragment()
         }
 
         getMovies()
-
-        mainScreenBinding.moviesGrid.setOnClickListener {
-            findNavController().navigate(R.id.detailsScreen)
-        }
     }
 
     private fun configureMoviesGridView()
@@ -67,7 +63,8 @@ class MainScreen : Fragment()
     {
         moviesGridAdapter = MoviesGridAdapter(movies, object : setOnMovieItemClickListener{
             override fun onClick(movieID: Int) {
-                findNavController().navigate(R.id.detailsScreen)
+                var action = MainScreenDirections.actionMainScreenToDetailsScreen(movieID)
+                findNavController().navigate(action)
             }
         })
         mainScreenBinding.moviesGrid.adapter = moviesGridAdapter

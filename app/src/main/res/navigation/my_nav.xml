@@ -22,5 +22,8 @@
         <action
             android:id="@+id/action_detailsScreen_to_mainScreen"
             app:destination="@id/mainScreen" />
+        <argument
+            android:name="movieID"
+            app:argType="integer" />
     </fragment>
 </navigation>
