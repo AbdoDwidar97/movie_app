@@ -51,7 +51,8 @@ class MainViewModel : ViewModel()
                             movieYear = LocalDate.parse(it.release_date).year.toString(),
                             movieName = it.original_title,
                             imageUrl = "https://image.tmdb.org/t/p/w500${it.poster_path}",
-                            rate = it.vote_average
+                            rate = it.vote_average,
+                            movieID = it.id
                         ))
                     }
                     moviesList.postValue(movies)

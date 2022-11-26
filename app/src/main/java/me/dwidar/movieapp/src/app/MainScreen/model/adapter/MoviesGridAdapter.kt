@@ -8,7 +8,8 @@ import me.dwidar.movieapp.R
 import me.dwidar.movieapp.databinding.MovieListItemBinding
 import me.dwidar.movieapp.src.app.MainScreen.model.MovieListItem
 
-class MoviesGridAdapter(private val moviesList : ArrayList<MovieListItem>) : RecyclerView.Adapter<MoviesGridAdapter.MyViewHolder>()
+class MoviesGridAdapter(private val moviesList : ArrayList<MovieListItem>,
+                        private val setOnMovieItemClickListener: setOnMovieItemClickListener) : RecyclerView.Adapter<MoviesGridAdapter.MyViewHolder>()
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -20,6 +21,7 @@ class MoviesGridAdapter(private val moviesList : ArrayList<MovieListItem>) : Rec
         holder.bindItem(currentMovie)
         holder.itemBinding.cardItem.setOnClickListener {
             Log.d("Movie", "name: ${currentMovie.movieName}")
+            setOnMovieItemClickListener.onClick(currentMovie.movieID)
         }
     }
 

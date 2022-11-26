@@ -6,12 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import me.dwidar.movieapp.R
 import me.dwidar.movieapp.databinding.FragmentMainScreenBinding
 import me.dwidar.movieapp.databinding.MainActionBarBinding
 import me.dwidar.movieapp.src.app.MainScreen.model.MovieListItem
 import me.dwidar.movieapp.src.app.MainScreen.model.adapter.MoviesGridAdapter
+import me.dwidar.movieapp.src.app.MainScreen.model.adapter.setOnMovieItemClickListener
 import me.dwidar.movieapp.src.app.MainScreen.viewModel.MainViewModel
 
 class MainScreen : Fragment()
@@ -48,6 +51,10 @@ class MainScreen : Fragment()
         }
 
         getMovies()
+
+        mainScreenBinding.moviesGrid.setOnClickListener {
+            findNavController().navigate(R.id.detailsScreen)
+        }
     }
 
     private fun configureMoviesGridView()
@@ -58,7 +65,11 @@ class MainScreen : Fragment()
 
     private fun updateMoviesGridView(movies : ArrayList<MovieListItem>)
     {
-        moviesGridAdapter = MoviesGridAdapter(movies)
+        moviesGridAdapter = MoviesGridAdapter(movies, object : setOnMovieItemClickListener{
+            override fun onClick(movieID: Int) {
+                findNavController().navigate(R.id.detailsScreen)
+            }
+        })
         mainScreenBinding.moviesGrid.adapter = moviesGridAdapter
     }
 
